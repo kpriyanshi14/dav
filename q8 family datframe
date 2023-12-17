@@ -1,0 +1,16 @@
+import numpy as np 
+import pandas as pd
+data= {'Name':['Shah','Vats','Vats','Kumar','Vats','Kumar','Shah','Shah','Kumar','Vats'],
+       'Gender':['M','M','F','F','F','M','M','F','F','M'],
+       'MonthlyIncome':[114000.00,65000.00,43150.00,69500.00,155000.00,103000.00,55000.00,112400.00,81030.00,71900.00]}
+df=pd.DataFrame(data)
+df
+a. Calculate and display familywise gross monthly income
+df.groupby('Name')['MonthlyIncome'].sum()
+b. Calculate and display the member with the highest monthly income in a family
+df.groupby('Name')['MonthlyIncome'].max()
+c. Calculate and display monthly income of all members with income greater than Rs. 60000.00
+df[df['MonthlyIncome']>60000.00]
+d. Calculate and display the average monthly income of the female members in the Shah family 
+Shah=df[df['Name']=='Shah']
+Shah[Shah['Gender']=='F'].mean()
