@@ -1,0 +1,21 @@
+import pandas as pd
+data=pd.read_csv('GameSales.csv',encoding='latin-1')
+data
+a. Compute mean of a series grouped by another series
+import numpy as np
+data.groupby('Genre')['Global'].mean()
+b. Fill an intermittent time series to replace all missing dates with values of previous non-missing dates
+data['Year'].fillna(inplace=True,method='ffill')
+c. Perform appropriate year-month string to dates conversion
+from datetime import datetime
+date=list()
+for i in data['Year']:
+    date.append(datetime.strptime(str(i),'%Y.%M'))
+data['Year']=date
+data
+d. Split a dateset to group by two columns and then sort the aggregated results within the groups
+
+pd.pivot_table(data,values='Global',index=['Genre','Year'],aggfunc='mean').sort_values(by='Global')
+e. Split a given dataframe into groups with bin counts
+grouped=data.groupby(['Genre',pd.cut(data['Global'],5)])
+grouped.size().unstack()
